@@ -135,8 +135,7 @@ if __name__ == '__main__':
     gradient_accumulation_steps = full_batch_size // micro_batch_size
     workers = 1  # 4
 
-    #dataset_path = 'H:\\PycharmProjects\\VQGAN-pytorch-main\\driving_images4.h5'
-    dataset_path = "D:\\datasets\\driving_images4.h5"
+    dataset_path = "../dataset/dummy_train_driving_images.h5"
 
     train_dataset = ImageDataset(h5_file_path=dataset_path, transform=None)
 

@@ -39,7 +39,7 @@ if __name__ == '__main__':
     model.load_state_dict(torch.load('vqvae_v4_2999.pth'))
 
     #file_path = 'driving_images3.h5'
-    file_path = 'D:\\datasets\\driving_images4.h5'
+    file_path = "../dataset/dummy_train_driving_images.h5"
 
     print('h1')
     train_dataset = ImageDataset(file_path)

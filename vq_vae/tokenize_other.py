@@ -15,7 +15,7 @@ def export_h5_dataset_to_text(h5_file_path, dataset_name, output_text_file):
     print(f"Data from {dataset_name} has been exported to {output_text_file}")
 
 # Example usage
-h5_file_path = 'H:\\PycharmProjects\\VQGAN-pytorch-main\driving_images4.h5'
+h5_file_path = "../dataset/dummy_train_driving_images.h5"
 out_folder = 'out_dataset'
 
 with h5py.File(h5_file_path, 'r') as h5_file:

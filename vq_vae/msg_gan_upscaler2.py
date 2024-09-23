@@ -165,7 +165,7 @@ gradient_accumulation_steps = full_batch_size // micro_batch_size
 z_dim = 100
 #dataset_path = "driving_images.h5"
 #dataset_path = 'H:\\PycharmProjects\\self_driving_reader\\driving_images4.h5'
-dataset_path = "D:\\datasets\\driving_images4.h5"
+dataset_path = "../dataset/dummy_train_driving_images.h5"
 
 # Data loading
 transform = transforms.Compose([
