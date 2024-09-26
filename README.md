@@ -1,6 +1,6 @@
 # Driving Simulator
 
-##Instrukcije i objašnjenja
+## Instrukcije i objašnjenja
 
 - Preuzeti i instalirati anacondu https://www.anaconda.com/
 - pokrenuti anaconda prompt
@@ -25,7 +25,7 @@ foldere Chunk_1 ... Chunk_4
 Za test skup je potrebno kreirati 'data_test' folder 'drive_reader' folderu i ekstraktovati peti čank u njega, tako da 'data_test' folder sadrži
 foldere Chunk_5
 
-###Podešavanje Pycharm okruženja:
+### Podešavanje Pycharm okruženja:
 - preuzeti i instalirati Pycharm https://www.jetbrains.com/pycharm/
 - otvoriti projekat: File->Open-><driving-simulator putanja>
 - podesiti okruženje: File->Settings-> Pretražiti 'python interpreter'
@@ -43,7 +43,7 @@ i ugla volana, interpolira ih i uzrokuje u trenucima koji se poklapaju sa trenuc
 iseca gornju i donju trećinu frejma, i menja dimenzije na 544x136. Za kraj, eksportuje niz frejmova, brzine i uglove volana u navedeni h5
 fajl.
 
-###VQ-VAE obuka:
+### VQ-VAE obuka:
 Potrebno je otvoriti `train_vqvae.py` skriptu u 'vq_vae' folderu. Unutar skripte se nalazi main funkcija, gde se može podesiti putanja do
 skupa za obuku. Ovo se može postaviti menjanjem vrednosti promenljive 'dataset_path' na putanju do prethodno generisanog h5 fajla za obuku.
 Nakon toga, dovoljno je pokrenuti ovu skriptu unutar Pycharm-a, koja će zatim započeti obuku VQ-VAE modela.
@@ -64,7 +64,7 @@ optimizer.step() koji vrši optimizacioni korak i ažurira težine modela. Svaki
 Nije potrebno čekati da prođe svih 1000 epoha, Posle par epoha, kada gubitak prestane značajno da se smanjuje se može prekinuti obuka i
 koristiti poslednji sačuvani .pth fajl modela.
 
-###MSG-GAN obuka:
+### MSG-GAN obuka:
 Uloga MSG-GAN-a u ovom radu je da na osvnovu kvantizovanih embeding vektora VQ-VAE enkodera, rekonstruiše originalnu sliku, tako da
 nedoumice nastale gubitkom informacija prilikom kvantizacije, rešava dodavanjem detalja koji možda nisu prisutni u originalnoj slici.
 Za obuku MSG-GAN-a u vq_vae folderu se može pokrenuti skripta `msg_gan_upscaler2.py`. U njemu se takođe može promeniti vrednost promenljive
@@ -89,7 +89,7 @@ Na kraju se računa gubitak diskriminatora koristeći binarnu unakrsnu entropiju
 pitanju. Svakih save_every iteracija, generator se čuva kao generator.pth fajl, i trening je moguće ranije prekinuti, kada rezultati postanu
 zadovoljavajući.
 
-###Tokenizacija slike:
+### Tokenizacija slike:
 `tokenize_dataset.py` se može koristiti za kreaciju novog skupa podataka, sačinjenog od indeksa tokena nastalih kvantizacijom originalnog
 skupa za obuku. Moguće je promeniti file_path promenljivu u main funkciji da pokazuje na putanju do skupa za obuku, kao i
 model.load_state_dict(torch.load('vqvae_v4_2999.pth')) imenom obučenog VQ-VAE fajla.
@@ -101,11 +101,11 @@ trenutno procesiranog videa, i dodaje indekse u novu listu. Ovo se radi kako bi 
 iz jednog videa u drugi. Na karju, svaka od ovih listi se čuva u tekstualnim fajlovima. Potrebno je napraviti out_dataset folder, u koji će
 ovi fajlovi biti izvezeni.
 
-###Izvoz brzine i ugla volana:
+### Izvoz brzine i ugla volana:
 `tokenize_other.py`, iako se tako zove, ne vrši nikakvu tokenizaciju. Jedina stvar koju ova skripta radi je da kreira tekstualne fajlove
 u koje zapisuje brzine i ugao volana. Ovi fajlovi će se kasnije koristiti za obuku simulatora.
 
-###Simulator:
+### Simulator:
 U simulator folderu se nalazi `transformer.py` fajl, u kojem je, pomoću pytorch transformer enkodera i dekodera implementirana varijanta
 transformera. Na ulaz forward funkcije se dovode 'input' kao tenzor indeksa ulaznih tokena slike, ugla volana i brzine, kao i 'context' kao
 tenzor tokena naredne slike, koja se predviđa. U telu funkcije se najpre generišu sinusoidalni pozicioni enkodinzi i dodaju na input i
@@ -135,7 +135,7 @@ Nakon toga se uzimaju sve brzine i uglovi volana (bez preskoka) i dodaju na list
 Kontekst, s druge strane, uzima samo tokene na context_length indeksu, redom: slika, ugao volana, brzina, i na početno mesto se dodaje
 start token sa vrednosti 0. Target tenzor se pronalazi na sličan način, osim što mu se ne dodaje start token, i što se one-hot enkoduje.
 
-###Obuka simulatora:
+### Obuka simulatora:
 Obuka simulatora se vrši u `train_transformer_vqmsgan.py` skripti. Unutar nje se može videti da se past_length postavlja na 1, što znači
 da eksponencijalna memorija praktično nije bila korištena (kao ulaz se koristi samo prethodni frejm, brzina i ugao). Nakon inicijalizacije
 osnovnih promenljivih, sledi definisanje arhitekture modela. U fajlu je trenutno implementiran najveći model od 200M parametara, ali je
@@ -164,7 +164,7 @@ u tenzor embedinga. Ovo dalje može služiti kao ulaz u MSG-GAN, koji na izlazu 
 rezolucije 272x68, na nju se docrtava volan zakrivljen za ugao, kao i natpis brzine. Konačno, frejm se čuva u generated_images folder.
 Svakih save_every_n_iterations iteracija, čuva se model, zajedno sa ostalim vrednostima, kao što je stanje optimizatora.
 
-###Testiranje simulatora:
+### Testiranje simulatora:
 Pokretanjem `measurement_test.py` skripte pokreće se faza zaključivanja nad test skupu sa ulaznim vrednostima brzine određenim sa speed=15.0
 i angle=0.0. Ova skripta radi realativno neizmenjeno u odnosu na periodično generisanje slika u fazi obuke, s tim su sada brzina i ugao
 volana fiksirani na konkretnu vrednost. Kao i kod ostalih skripti, moguće je promeniti putanju do test skupa, VQ-VAE i MSG-GAN modela, kao
@@ -172,7 +172,7 @@ i putanju do foldera za izvoz. Promenom parametara sample_size, može se promeni
 video_length može menjati broj frejmova koji će biti generisani. Glavna razlika ovog fajla u odnosu na skriptu za obuku je to što ne koristi
 `dataset.py` kao klasu baze podataka, već image_h5_dataset i dobaljenu sliku najpre tokenizuje pozivom tokenize_image() funkcije.
 
-###Računica FID skora:
+### Računica FID skora:
 U fid_calculation folderu se nalazi 1image_dataset_fid.py1 skripta, koja, slično kao i kod prethodnih fajlova, pristupa h5 fajlu, i vraća
 sliku za dati broj indeksa. Jedina razlika ovde je ta što se pre vraćanja, rezolucija slike prepolovljava kako bi se poklopila sa rezolucijom
 drugog izlaza iz MSG-GAN-a.
