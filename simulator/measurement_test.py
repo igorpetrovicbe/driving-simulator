@@ -296,7 +296,7 @@ msgan = MSG_Generator().to(device)
 loaded_generator_state = torch.load('msgan_v4.pth')
 msgan.load_state_dict(loaded_generator_state)
 
-sample_size = 5
+sample_size = 100
 
 if __name__ == "__main__":
     for sample_index in range(sample_size):
@@ -316,7 +316,7 @@ if __name__ == "__main__":
 
             # Convert from RGB (PyTorch default) to BGR (OpenCV default)
             input_image_detached = cv2.cvtColor(input_image_detached, cv2.COLOR_RGB2BGR)
-            cv2.imwrite(f'paper_images/{sample_index}_-1.png', input_image_detached)
+            cv2.imwrite(f'test_measurement_images/{sample_index}_-1.png', input_image_detached)
 
             seed_list = tokenize_image(image)
             video_length = 6
@@ -386,7 +386,7 @@ if __name__ == "__main__":
                     cv2.putText(image_np, f"Speed: {speed:.2f} m/s", (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.25,
                                 (255, 255, 255), 1)
 
-                cv2.imwrite(f'paper_images/{sample_index}_{k}.png', image_np)
+                cv2.imwrite(f'test_measurement_images/{sample_index}_{k}.png', image_np)
 
                 # Print the generated indices
                 print(f"Generated {len(current_image_indices)} image indices:")

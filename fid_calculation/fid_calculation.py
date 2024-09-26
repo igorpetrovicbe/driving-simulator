@@ -182,7 +182,7 @@ show_transformed_images(gen_loader)  # Generated images
 show_transformed_images(real_loader)  # Real images
 
 
-load_mode = True
+load_mode = False
 # Extract features from real and generated images
 if not load_mode:
     real_features = extract_features(real_loader, 1000)
