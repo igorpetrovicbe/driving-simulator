@@ -37,7 +37,7 @@ Nakon toga, potrebno je pokrenuti `export_test_set.py` skriptu koja če generisa
 
 Ove dve skripte prolaze kroz sve čankove u ciljanom folderu, unutar kojih se nalaze folderi sa snimcima različitih ruta. Skripta dalje
 prolazi kroz svaki od foldera ruta, unutar kojih se nalaze folderi sa segmentima snimka te rute u obliku `video.hvec` fajla. U istom folderu
-se takođe nalaze putanje processed_log->CAN->speed i processed_log->CAN-steering_angle. Ovi folderi sadrže informacije o vremenskim trenucima
+se takođe nalaze putanje processed_log->CAN->speed i processed_log->CAN->steering_angle. Ovi folderi sadrže informacije o vremenskim trenucima
 `t` fajl, i snimljene vrednosti u `value` fajlu. Skripta za svaki segment, svake rute, svakog čanka uzima vremenske trenutke i vrednosti brzine
 i ugla volana, interpolira ih i uzrokuje u trenucima koji se poklapaju sa trenucima video fajla. Zatim prolazi kroz sve frejmove video fajla,
 iseca gornju i donju trećinu frejma, i menja dimenzije na 544x136. Za kraj, eksportuje niz frejmova, brzine i uglove volana u navedeni h5
