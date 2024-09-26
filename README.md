@@ -27,7 +27,7 @@ foldere Chunk_5
 
 ### Podešavanje Pycharm okruženja:
 - preuzeti i instalirati Pycharm https://www.jetbrains.com/pycharm/
-- otvoriti projekat: File->Open-><driving-simulator putanja>
+- otvoriti projekat: File->Open->'driving-simulator putanja'
 - podesiti okruženje: File->Settings-> Pretražiti 'python interpreter'
 	- padajući meni->show all->drivesim-env->Ok
 
